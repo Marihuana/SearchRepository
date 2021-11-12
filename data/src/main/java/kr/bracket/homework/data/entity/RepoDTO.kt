@@ -3,6 +3,7 @@ package kr.bracket.homework.data.entity
 import kr.bracket.homework.domain.model.RepoVO
 import com.google.gson.annotations.SerializedName
 import kr.bracket.homework.data.DataUtil
+import java.io.Serializable
 
 data class RepoDTO(
     @SerializedName("name")
@@ -66,4 +67,4 @@ data class ResponseDTO<T> (
 
 data class LicenseDTO(
     val name : String
-)
+) : Serializable

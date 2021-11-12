@@ -12,8 +12,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
+import kr.bracket.homework.domain.model.RepoVO
 import kr.bracket.homework.presentation.R
 import kr.bracket.homework.presentation.databinding.ActivitySearchBinding
+import kr.bracket.homework.presentation.view.adapter.RepoAdapter
 import kr.bracket.homework.presentation.viewmodel.SearchViewModel
 
 @AndroidEntryPoint
@@ -41,7 +43,7 @@ class SearchActivity : AppCompatActivity() {
 
         recyclerView = binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this@SearchActivity)
-            //adapter setting
+            adapter = RepoAdapter(::onItemClicked)
             //adapter =
         }
 
@@ -56,7 +58,7 @@ class SearchActivity : AppCompatActivity() {
 
     private fun bind(){
         viewModel.items.observe(this){
-            //submit data
+            (recyclerView.adapter as RepoAdapter).submitData(this.lifecycle, it)
         }
 
         viewModel.errorObserver.observe(this){ e ->
@@ -68,5 +70,13 @@ class SearchActivity : AppCompatActivity() {
 
     private fun hideKeyboard(view : View){
         imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    private fun onItemClicked(item : RepoVO){
+        Intent(this@SearchActivity, DetailActivity::class.java)
+            .apply { putExtra("repo", item) }
+            .run {
+                startActivity(this)
+            }
     }
 }
