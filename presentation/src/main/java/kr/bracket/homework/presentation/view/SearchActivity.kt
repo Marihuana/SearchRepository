@@ -1,5 +1,6 @@
 package kr.bracket.homework.presentation.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -10,15 +11,18 @@ import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import kr.bracket.homework.presentation.R
 import kr.bracket.homework.presentation.databinding.ActivitySearchBinding
 import kr.bracket.homework.presentation.viewmodel.SearchViewModel
 
+@AndroidEntryPoint
 class SearchActivity : AppCompatActivity() {
-    lateinit var binding : ActivitySearchBinding
     private val viewModel : SearchViewModel by viewModels()
-    private val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+
+    private lateinit var binding : ActivitySearchBinding
     private lateinit var recyclerView : RecyclerView
+    private lateinit var imm : InputMethodManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +37,8 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun init(){
+        imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+
         recyclerView = binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this@SearchActivity)
             //adapter setting
