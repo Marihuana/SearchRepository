@@ -8,7 +8,7 @@ plugins {
 apply from: rootProject.file("android.gradle")
 
 dependencies {
-    implementation project(":domain")
+    implementation (project(":domain")) { transitive = false }
 
     implementation (AndroidX.CORE_KTX)
     implementation(AndroidX.APP_COMPAT)
@@ -20,8 +20,9 @@ dependencies {
     //gson
     implementation (Google.GSON)
 
-    //rx
-    implementation (Libraries.RX_KOTLIN)
+    //paging
+    implementation (Paging.PAGING)
+    implementation (Paging.PAGING_RXJAVA3)
 
     //DI - hilt
     implementation (Google.HILT_ANDROID)
