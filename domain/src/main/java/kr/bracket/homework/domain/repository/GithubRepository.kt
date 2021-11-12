@@ -1,8 +1,9 @@
 package kr.bracket.homework.domain.repository
 
-import io.reactivex.rxjava3.core.Single
+import androidx.paging.PagingData
+import io.reactivex.rxjava3.core.Flowable
 import kr.bracket.homework.domain.model.RepoVO
 
 interface GithubRepository {
-    fun searchRepositories(query : String) : Single<List<RepoVO>>
+    fun searchRepositories(query : String) : Flowable<PagingData<RepoVO>>
 }
