@@ -18,7 +18,7 @@ data class RepoDTO(
     private val _topics : List<String>,
 
     @SerializedName("license")
-    private val _license : String?,
+    private val _license : LicenseDTO?,
 
     @SerializedName("stargazers_count")
     private val _stargazersCount : Double,
@@ -46,7 +46,7 @@ data class RepoDTO(
         get() = _topics
 
     override val license: String?
-        get() = _license
+        get() = _license?.name
 
     override val stargazersCount: Double
         get() = _stargazersCount
@@ -62,4 +62,8 @@ data class ResponseDTO<T> (
     @SerializedName("total_count") val total : Long,
     @SerializedName("incomplete_results") val incompleteResults : Boolean,
     @SerializedName("items") val items : List<T>
+)
+
+data class LicenseDTO(
+    val name : String
 )
