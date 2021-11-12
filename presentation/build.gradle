@@ -8,7 +8,7 @@ plugins {
 apply from: rootProject.file("android.gradle")
 
 dependencies {
-    implementation project(":domain")
+    implementation (project(":domain")) { transitive = false }
 
     implementation(AndroidX.CORE_KTX)
     implementation(AndroidX.APP_COMPAT)
@@ -22,16 +22,19 @@ dependencies {
     implementation (AndroidX.LIFECYCLE_VIEWMODEL_KTX)
     implementation (AndroidX.LIFECYCLE_LIVEDATA_KTX)
 
+    //paging
+    implementation (Paging.PAGING)
+    implementation (Paging.PAGING_RXJAVA3)
+
+    //Rx
+    implementation (Libraries.RX_KOTLIN)
+
     //flex box
     implementation (Google.FLEXBOX)
 
     //DI - hilt
     implementation (Google.HILT_ANDROID)
     kapt (Google.HILT_ANDROID_COMPILER)
-
-    //Rx
-    implementation (Libraries.RX_KOTLIN)
-
 
     testImplementation "junit:junit:${Versions.JUNIT}"
     androidTestImplementation "androidx.test.ext:junit:${Versions.ANDROID_JUNIT}"
