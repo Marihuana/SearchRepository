@@ -34,7 +34,7 @@ class RepoPagingSource(
         return LoadResult.Page(
             data = res.items,
             prevKey = null,
-            nextKey = page + (res.items.size / pageSize)
+            nextKey = if(res.items.size < pageSize) null else page + 1
         )
     }
 }
