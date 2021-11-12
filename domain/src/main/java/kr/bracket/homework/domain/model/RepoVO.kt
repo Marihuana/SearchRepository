@@ -7,7 +7,7 @@ interface RepoVO : Serializable {
     val fullName : String
     val description : String?
     val topics : List<String>
-    val stargazersCount : Double
+    val stargazersCount : String
     val license : String?
     val language : String?
     val updatedAt : Long?
