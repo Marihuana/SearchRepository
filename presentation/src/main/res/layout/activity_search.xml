@@ -26,6 +26,7 @@
                 android:paddingStart="@dimen/default_margin"
                 android:paddingEnd="@dimen/default_margin"
                 android:background="@drawable/shape_input_radius_8dp"
+                android:text="@={viewModel.inputText}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/default_text_size"
                 android:inputType="text"

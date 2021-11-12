@@ -5,14 +5,16 @@ import kr.bracket.homework.data.datasource.GithubService
 import kr.bracket.homework.data.mapper.RepoMapper
 import kr.bracket.homework.domain.model.RepoVO
 import kr.bracket.homework.domain.repository.GithubRepository
+import javax.inject.Inject
 
-class GithubRepositoryImpl (private val service : GithubService): GithubRepository {
+class GithubRepositoryImpl @Inject constructor(private val service : GithubService): GithubRepository {
     private val pageSize = 30
 
     override fun searchRepositories(query: String): Single<List<RepoVO>> {
         val fixed = "$query$QUERY_SUFFIX"
 
-        return service.getRepositories(fixed, 1, pageSize).map(RepoMapper::transform)
+        return service.getRepositories(fixed, 1, pageSize)
+            .map(RepoMapper::transform)
     }
 
     companion object {
