@@ -36,18 +36,24 @@ android {
 dependencies {
     implementation project(":domain")
 
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation (AndroidX.CORE_KTX)
+    implementation(AndroidX.APP_COMPAT)
+    implementation(Google.MATERIAL)
 
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.google.code.gson:gson:2.8.7'
-    implementation 'io.reactivex.rxjava3:rxkotlin:3.0.1'
+    // retrofit
+    implementation (Libraries.RETROFIT)
 
-    //hilt
-    implementation 'com.google.dagger:hilt-android:2.38.1'
-    kapt 'com.google.dagger:hilt-android-compiler:2.38.1'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    //gson
+    implementation (Google.GSON)
+
+    //rx
+    implementation (Libraries.RX_KOTLIN)
+
+    //DI - hilt
+    implementation (Google.HILT_ANDROID)
+    kapt (Google.HILT_ANDROID_COMPILER)
+
+    testImplementation "junit:junit:${Versions.JUNIT}"
+    androidTestImplementation "androidx.test.ext:junit:${Versions.ANDROID_JUNIT}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${Versions.ESPRESSO_CORE}"
 }
