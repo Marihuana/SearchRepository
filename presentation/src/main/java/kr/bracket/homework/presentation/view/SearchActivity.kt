@@ -6,14 +6,20 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import kr.bracket.homework.domain.model.RepoVO
 import kr.bracket.homework.presentation.R
+import kr.bracket.homework.presentation.common.observeEvent
 import kr.bracket.homework.presentation.databinding.ActivitySearchBinding
 import kr.bracket.homework.presentation.view.adapter.RepoAdapter
 import kr.bracket.homework.presentation.viewmodel.SearchViewModel
@@ -43,8 +49,23 @@ class SearchActivity : AppCompatActivity() {
 
         recyclerView = binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this@SearchActivity)
-            adapter = RepoAdapter(::onItemClicked)
-            //adapter =
+            adapter = RepoAdapter(::onItemClicked).apply {
+                addLoadStateListener { state ->
+                    binding.progressBar.isVisible = state.refresh is LoadState.Loading
+
+                    if(state.source.refresh is LoadState.NotLoading
+                        && state.append.endOfPaginationReached
+                        && recyclerView.adapter!!.itemCount < 1){
+
+                        isVisible = false
+                        binding.tvEmpty.isVisible = true
+                    }
+                    else{
+                        isVisible = true
+                        binding.tvEmpty.isVisible = false
+                    }
+                }
+            }
         }
 
         binding.etSearch.setOnEditorActionListener { view, action, _ ->
@@ -61,10 +82,9 @@ class SearchActivity : AppCompatActivity() {
             (recyclerView.adapter as RepoAdapter).submitData(this.lifecycle, it)
         }
 
-        viewModel.errorObserver.observe(this){ e ->
-            e?.getContent()?.also {
-                Toast.makeText(this@SearchActivity, it, Toast.LENGTH_SHORT).show()
-            }
+        viewModel.errorObserver.observeEvent(this){ message ->
+            if(message.isNotEmpty())
+                Toast.makeText(this@SearchActivity, message, Toast.LENGTH_SHORT).show()
         }
     }
 
