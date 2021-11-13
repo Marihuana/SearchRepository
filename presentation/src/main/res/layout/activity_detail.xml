@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="android.view.View" />
+
         <variable
             name="item"
             type="kr.bracket.homework.domain.model.RepoVO" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -56,17 +58,19 @@
             >
 
             <TextView
+                android:id="@+id/tvFullName"
                 style="@style/DetailTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{item.fullName}"
-                android:autoLink="web"
+                android:textColor="@color/blue"
                 />
 
             <TextView
                 style="@style/DetailTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="@{item.description == null ? View.GONE : View.VISIBLE}"
                 android:text="@{item.description}"
                 />
 
@@ -79,6 +83,7 @@
                 app:flexWrap="wrap"
                 app:alignItems="stretch"
                 app:alignContent="stretch"
+                android:visibility="@{item.topics.empty ? View.GONE : View.VISIBLE}"
                 app:topics="@{item.topics}"
                 />
 
@@ -96,6 +101,7 @@
                 style="@style/DetailTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="@{item.language == null ? View.GONE : View.VISIBLE}"
                 android:text="@{@string/languageFormat(item.language)}"
                 />
 
@@ -103,14 +109,16 @@
                 style="@style/DetailTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="@{item.license == null ? View.GONE : View.VISIBLE}"
                 android:text="@{@string/licenseFormat(item.license)}"
                 />
 
             <TextView
                 style="@style/DetailTextView"
+                android:id="@+id/tvUpdatedAt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{String.valueOf(item.updatedAt)}"
+                android:text="@{item.updatedAt}"
                 />
 
         </androidx.appcompat.widget.LinearLayoutCompat>

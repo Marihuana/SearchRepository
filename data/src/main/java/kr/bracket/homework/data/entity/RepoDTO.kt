@@ -59,7 +59,7 @@ data class RepoDTO(
     override val language: String?
         get() = _language
 
-    override val updatedAt: String?
+    override val updatedAt: String
         get() = DataUtil.dateStringToRelativeDateString(_updatedAt)
 }
 

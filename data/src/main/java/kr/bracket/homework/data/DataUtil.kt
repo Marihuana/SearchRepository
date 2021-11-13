@@ -12,7 +12,7 @@ object DataUtil {
         return sdf.parse(date)?.time
     }
 
-    fun dateStringToRelativeDateString(date : String) : String?{
+    fun dateStringToRelativeDateString(date : String) : String{
         return dateStringToLong(date)?.let { moment ->
             DateUtils.getRelativeTimeSpanString(
                 moment,
@@ -21,7 +21,7 @@ object DataUtil {
             ).let {
                 "updated${if(!it.contains("ago"))" on " else " "}${it}"
             }
-        } ?: null
+        } ?: ""
     }
 }
 
