@@ -4,17 +4,14 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import kr.bracket.homework.domain.model.RepoVO
 import kr.bracket.homework.presentation.R
 import kr.bracket.homework.presentation.databinding.ActivityDetailBinding
-import kr.bracket.homework.presentation.viewmodel.DetailViewModel
 
 class DetailActivity : AppCompatActivity() {
     lateinit var binding : ActivityDetailBinding
 
-    private val viewModel : DetailViewModel by viewModels()
     private var repo : RepoVO? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
