@@ -3,6 +3,7 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
       <module name="SearchRepository.app" target="11" />
+      <module name="SearchRepository.buildSrc" target="11" />
       <module name="SearchRepository.data" target="11" />
       <module name="SearchRepository.presentation" target="11" />
     </bytecodeTargetLevel>
