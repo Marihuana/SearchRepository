@@ -25,11 +25,11 @@ class RepoAdapter (private val listener : (RepoVO)-> Unit) : PagingDataAdapter<R
     companion object{
         private val diffCallback = object : DiffUtil.ItemCallback<RepoVO>(){
             override fun areItemsTheSame(oldItem: RepoVO, newItem: RepoVO): Boolean {
-                return oldItem.language == newItem.language
+                return oldItem.fullName == newItem.fullName
             }
 
             override fun areContentsTheSame(oldItem: RepoVO, newItem: RepoVO): Boolean {
-                return (oldItem.language == newItem.language)
+                return (oldItem.fullName == newItem.fullName)
             }
         }
     }
