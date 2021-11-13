@@ -56,7 +56,4 @@ object Libraries {
     const val RETROFIT_ADAPTER_RXJAVA    = "com.squareup.retrofit2:adapter-rxjava3:${Versions.RETROFIT}"
     const val OKHTTP                     = "com.squareup.okhttp3:okhttp:${Versions.OKHTTP}"
     const val OKHTTP_SSE                 = "com.squareup.okhttp3:okhttp-sse:${Versions.OKHTTP}"
-    const val OKHTTP_LOGGING_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:${Versions.OKHTTP}"
-    const val GLIDE     = "com.github.bumptech.glide:glide:4.12.0"
-    const val GLIDE_COMPILER  = "com.github.bumptech.glide:compiler:4.8.0"
 }
