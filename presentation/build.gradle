@@ -1,44 +1,42 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
-android {
-    compileSdk 30
-
-    defaultConfig {
-        minSdk 21
-        targetSdk 30
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-}
+apply from: rootProject.file("android.gradle")
 
 dependencies {
-    implementation project(":domain")
+    implementation (project(":domain")) { transitive = false }
 
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation(AndroidX.CORE_KTX)
+    implementation(AndroidX.APP_COMPAT)
+    implementation(AndroidX.CONSTRAINT_LAYOUT)
+    implementation(Google.MATERIAL)
+
+    // Activity (ViewModels)
+    implementation (AndroidX.ACTIVITY_KTX)
+
+    //lifecycle
+    implementation (AndroidX.LIFECYCLE_VIEWMODEL_KTX)
+    implementation (AndroidX.LIFECYCLE_LIVEDATA_KTX)
+
+    //paging
+    implementation (Paging.PAGING)
+    implementation (Paging.PAGING_RXJAVA3)
+
+    //Rx
+    implementation (Libraries.RX_KOTLIN)
+
+    //flex box
+    implementation (Google.FLEXBOX)
+
+    //DI - hilt
+    implementation (Google.HILT_ANDROID)
+    kapt (Google.HILT_ANDROID_COMPILER)
+
+    testImplementation "junit:junit:${Versions.JUNIT}"
+    androidTestImplementation "androidx.test.ext:junit:${Versions.ANDROID_JUNIT}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${Versions.ESPRESSO_CORE}"
 }
