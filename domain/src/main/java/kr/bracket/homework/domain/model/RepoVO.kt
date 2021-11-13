@@ -10,5 +10,5 @@ interface RepoVO : Serializable {
     val stargazersCount : String
     val license : String?
     val language : String?
-    val updatedAt : Long?
+    val updatedAt : String?
 }

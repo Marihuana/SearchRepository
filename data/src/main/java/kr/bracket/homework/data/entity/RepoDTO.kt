@@ -59,8 +59,8 @@ data class RepoDTO(
     override val language: String?
         get() = _language
 
-    override val updatedAt: Long?
-        get() = DataUtil.dateStringToLong(_updatedAt)
+    override val updatedAt: String?
+        get() = DataUtil.dateStringToRelativeDateString(_updatedAt)
 }
 
 data class ResponseDTO<T> (
