@@ -30,9 +30,21 @@ class DetailActivity : AppCompatActivity() {
                 this.lifecycleOwner = this@DetailActivity
                 this.item = repo
             }
+            init()
         }
     }
 
+    private fun init(){
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+
+        binding.tvFullName.setOnClickListener{
+            repo?.run {
+                redirect("https://github.com/$fullName")
+            }
+        }
+    }
 
     private fun redirect(url : String){
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))

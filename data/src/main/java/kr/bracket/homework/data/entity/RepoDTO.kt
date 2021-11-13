@@ -1,5 +1,9 @@
 package kr.bracket.homework.data.entity
 
+import android.icu.text.RelativeDateTimeFormatter
+import android.os.Build
+import android.text.format.DateUtils
+import androidx.annotation.RequiresApi
 import kr.bracket.homework.domain.model.RepoVO
 import com.google.gson.annotations.SerializedName
 import kr.bracket.homework.data.DataUtil
@@ -49,14 +53,14 @@ data class RepoDTO(
     override val license: String?
         get() = _license?.name
 
-    override val stargazersCount: Double
-        get() = _stargazersCount
+    override val stargazersCount: String
+        get() = if(_stargazersCount < 1000) "${_stargazersCount.toInt()}" else String.format("%.1f k",_stargazersCount / 1000)
 
     override val language: String?
         get() = _language
 
-    override val updatedAt: Long?
-        get() = DataUtil.dateStringToLong(_updatedAt)
+    override val updatedAt: String
+        get() = DataUtil.dateStringToRelativeDateString(_updatedAt)
 }
 
 data class ResponseDTO<T> (
